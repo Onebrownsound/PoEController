@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PoEController Menu</title>
+
+		<script src="lib/jquery/jquery.min.js"></script>
+		<script src="lib/bootstrap/bootstrap.min.js"></script>
+		<script src="lib/select2/select2.min.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="lib/select2/select2.min.css" />
+		
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		
+	</head>
+	<body id="main-menu-body" style="display: none;" unselectable="on" onselectstart="return false;">
+		
+		<div id="main-menu" class="container-fluid">
+			
+			<div id="close-btn"></div>
+			
+			<div class="ui-element" id="select-input-method-box">
+				<label>Input Method</label>
+
+				<select class="form-control" id="select-input-method">
+					<option value="xbox">XBOX</option>
+					<option value="ps3">PS3</option>
+				</select>
+
+			</div>
+
+			<div id="button-dpad-up" class="button-input">
+				<label>DPAD UP (4)</label>
+			</div>
+
+			<div id="button-dpad-down" class="button-input">
+				<label>DPAD DOWN (2)</label>
+			</div>			
+			
+			<div id="button-dpad-left" class="button-input">
+				<label>DPAD LEFT (1)</label>
+			</div>
+			
+			<div id="button-dpad-right" class="button-input">
+				<label>DPAD RIGHT (3)</label>
+			</div>
+			
+			<div id="button-key-up" class="button-input">
+				<label>KEY UP (R)</label>
+				<div>
+					<select class="button-input-type">
+					</select>
+				</div>
+			</div>
+
+			<div id="button-key-down" class="button-input">
+				<label>KEY DOWN (W)</label>
+				<div>
+					<select class="button-input-type">
+					</select>
+				</div>
+			</div>			
+			
+			<div id="button-key-left" class="button-input">
+				<label>KEY LEFT (Q)</label>
+				<div>
+					<select class="button-input-type">
+					</select>
+				</div>
+			</div>
+			
+			<div id="button-key-right" class="button-input">
+				<label>KEY RIGHT (E)</label>
+				<div>
+					<select class="button-input-type">
+					</select>
+				</div>
+			</div>
+			
+			<div id="button-shoulder-right" class="button-input">
+				<label>KEY SHOULDER RIGHT (MOUSE RIGHT)</label>
+				<div>
+					<select class="button-input-type">
+					</select>
+				</div>
+			</div>
+			
+			<div id="button-shoulder-left" class="button-input">
+				<label>KEY SHOULDER LEFT (MOUSE MIDDLE)</label>
+				<div>
+					<select class="button-input-type">
+					</select>
+				</div>
+			</div>
+			
+			<div id="button-key-l3" class="button-input">
+				<label>KEY L3 (5)</label>
+			</div>
+			
+			<label id="label-char-movement">CHARACTER MOVEMENT</label>
+			<label id="label-mouse-cursor">MOUSE CURSOR (R3: CTRL)</label>
+			<label id="label-mouse-click">MOUSE CLICK (WITH ALT)</label>
+			<label id="label-escape">ESCAPE</label>
+			<label id="label-loot-position">LOOT POSITION</label>
+			<label id="label-open-menu">OPEN MENU</label>
+			
+			<canvas id="reference-img"></canvas>
+			
+			<div id="start-area">
+				<div>
+					<label><span id="warning-msg">*** DO NOT MINIMIZE THIS SCREEN ***</span></label>
+				</div>
+				<div>
+					<label><span id="flash-msg"></span></label>
+				</div>
+				<div>
+					<label><a target="_blank" href="https://github.com/csiqueirasilva/PoEController/blob/master/README.md">Click here to check the README file for more information</a></label>
+				</div>
+				<div>
+					
+					<div class="menu-choice-checkbox checkbox">
+						<label><input id="keybinds-help-checkbox" type="checkbox" checked="checked">Show keybind/loot overlay</label>
+					</div>
+
+					<div class="menu-choice-checkbox checkbox">
+						<label><input id="arpg-help-checkbox" type="checkbox" checked="checked">Use ARPG mode on-screen help</label>
+					</div>
+					
+					<div  class="menu-choice-checkbox checkbox">
+						<label><input id="menu-help-checkbox" type="checkbox" checked="checked">Use menus on-screen help</label>
+					</div>
+
+					<button id="btn-start" class="btn">Start gamepad</button>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- imgs -->
+		<img style="display: none;" id="xbox-img" src="imgs/xbox.png" />
+		<img style="display: none;" id="ps3-img" src="imgs/ps3.png" />
+		<!-- imgs -->
+
+		<script>
+			var gui = require('nw.gui');
+			
+			global.$ = $;
+			global.document = document;
+			global.menuWindow = gui.Window.get();
+			
+			require('./game/Main');
+		</script>
+		
+		<script src="./menu/UI.js"></script>
+		
+		<script>
+			
+			var UserSettings = require('./menu/UserSettings');
+			var PoESettings = require('./menu/PoESettings');
+			var KEYS = require('./game/Enums').KEYS;
+			var GAME_MODE = require('./game/Enums').GAME_MODE;
+			var GameModeARPG = require('./game/modes/ARPG');
+			var Game = require('./game/Game');
+			
+			global.menuWindow.on('focus', function() {
+				global.hideAllHelp();
+			});
+	
+			$('#arpg-help-checkbox').click(function() {
+				global.setARPGHelp($(this).is(':checked'));
+			});
+
+			$('#keybinds-help-checkbox').click(function() {
+				global.setKeybindsHelp($(this).is(':checked'));
+			});
+
+			$('#menu-help-checkbox').click(function() {
+				global.setMenuHelp($(this).is(':checked'));
+			});
+			
+			function updateGameOverlay (mode) {
+				global.showGameOverlay($('#select-input-method').val(), mode);
+			}
+	
+			// src: https://github.com/nwjs/nw.js/issues/1162
+			$('a[target=_blank]').on('click', function(){
+				require('nw.gui').Shell.openExternal( this.href );
+				return false;
+			});
+	
+			$('select').select2();
+	
+			$('#select-input-method').change();
+	
+			$('#btn-start').click(function() {
+			
+				UserSettings.Save();
+			
+				var otherInputs = $('select, button, input').not(this);
+			
+				if($(this).html() === "Stop gamepad") {
+					global.hideGameOverlay();
+					Game.finish();
+					$(this).html("Start gamepad");
+					otherInputs.prop('disabled', false);
+				} else {
+					$('select, button, input').prop('disabled', true);
+					
+					var inputArgs = {};
+					
+					inputArgs[KEYS.KEY_UP] = $('#button-key-up select').val();
+					inputArgs[KEYS.KEY_SHOULDER_LEFT] = $('#button-shoulder-left select').val();
+					inputArgs[KEYS.KEY_LEFT] = $('#button-key-left select').val();
+					inputArgs[KEYS.KEY_SHOULDER_RIGHT] = $('#button-shoulder-right select').val();
+					inputArgs[KEYS.KEY_RIGHT] = $('#button-key-right select').val();
+					inputArgs[KEYS.KEY_DOWN] = $('#button-key-down select').val();
+					
+					GameModeARPG.setBehavior(inputArgs);
+
+					var btn = $(this);
+					
+					Game.start(function() {
+						global.gameOverlay.focus();
+						setTimeout(function() {
+							 updateGameOverlay(GAME_MODE.ARPG);
+							$('#flash-msg').hide();
+							btn.prop('disabled', false);
+						}, 6500);
+					});
+
+					$('#flash-msg').html("If you have Path of Exile Steam Version it will open (or focus the window, if already open).<br />If not, please open Path of Exile's game client.");
+					$('#flash-msg').show();
+
+					$(this).html("Stop gamepad");
+				}
+			});
+
+			function QuitApplication() {
+				UserSettings.Save(function() {
+					PoESettings.restoreConfigFile();
+					gui.App.quit();
+				});
+			}
+				
+			global.menuWindow.on('close', function () {
+				QuitApplication();
+			});
+			
+			global.gameOverlay.on('close', function () {
+				QuitApplication();
+			});
+	
+			$('#close-btn').click(function () {
+				QuitApplication();
+			});
+	
+			$(window).load(function() {
+				UserSettings.Load(function() {
+					$('#main-menu-body').show();
+					$('#select-input-method').trigger('change');
+					global.menuWindow.focus();
+				});
+			});
+	
+		</script>
+		
+	</body>
+</html>

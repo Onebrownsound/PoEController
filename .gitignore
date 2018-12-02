@@ -1,0 +1,6 @@
+node_modules
+bin
+build
+nbproject
+output.log
+npm-debug.log

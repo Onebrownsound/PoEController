@@ -1,0 +1,405 @@
+@font-face {
+	font-family: "Fontin";
+	src: url("font/Fontin-Regular.ttf")
+}
+
+@font-face {
+	font-family: "FontinBold";
+	src: url("font/Fontin-Bold.ttf")
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+/* index.html */
+
+* {
+	font-family: "Fontin";
+	color: #ffc;
+}
+
+#close-btn:hover {
+	background-image: url("imgs/close-over.png");
+	cursor: pointer;
+}
+
+#close-btn {
+	width: 28px;
+	height: 28px;
+	background-image: url("imgs/close.png");
+	position: absolute;
+	top: 1%;
+	right: 1%;
+}
+
+.ui-element {
+	position: absolute;
+}
+
+#main-menu {
+	margin: 0px;
+	padding: 0px;
+}
+
+#select-input-method-box {
+	width: 100px;
+	left: 1%;
+	top: 1%;
+}
+
+.button-input {
+	min-width: 160px;
+	position: absolute;
+	z-index: 5;
+}
+
+label {
+	text-shadow: 1px 0 0 #a71, -1px 0 0 #a71, 0 1px 0 #a71, 0 -1px 0 #a71, 1px 1px #a71, -1px -1px 0 #a71, 1px -1px 0 #a71, -1px 1px 0 #a71;
+}
+
+#button-dpad-up {
+	bottom: 16%;
+	left: 1%;
+}
+
+#button-dpad-left {
+	bottom: 11%;
+	left: 1%;
+}
+
+#button-dpad-right {
+	bottom: 6%;
+	left: 1%;
+}
+
+#button-dpad-down {
+	bottom: 1%;
+	left: 1%;
+}
+
+#button-shoulder-left {
+	top: 38%;
+	left: 1%;
+}
+
+#button-shoulder-right {
+	bottom: 49%;
+	right: 1%;
+	text-align: right;
+}
+
+#button-key-up {
+	bottom: 37%;
+	right: 1%;
+	text-align: right;
+}
+
+#button-key-left {
+	bottom: 25%;
+	right: 1%;
+	text-align: right;				
+}
+
+#button-key-right {
+	bottom: 13%;
+	right: 1%;
+	text-align: right;				
+}
+
+#button-key-down {
+	bottom: 1%;
+	right: 1%;
+	text-align: right;				
+}
+
+#button-key-l3 {
+	bottom: 21%;
+	left: 1%;
+}
+
+#label-char-movement {
+	position: absolute;
+	left: 3%;
+	top: 20%;
+}
+
+#label-loot-position {
+	position: absolute;
+	left: 40%;
+	top: 10%;
+}
+
+#label-escape {
+	position: absolute;
+	left: 30%;
+	top: 1%;
+}
+
+#label-mouse-click {
+	position: absolute;
+	right: 3%;
+	top: 9%;
+}
+
+#label-mouse-cursor {
+	position: absolute;
+	right: 35%;
+	top: 70%;
+}			
+
+#label-open-menu {
+	position: absolute;
+	right: 35%;
+	top: 1%;
+}			
+
+#btn-start:hover {
+	background-color: #a71;
+	color: #000;
+}
+
+#start-area {
+	position: absolute;
+	bottom: 1%;
+	width: 100%;
+	text-align: center;
+}
+
+#start-area a {
+	color: #ffc;
+	font-family: 'FontinBold';
+}
+
+#btn-start {
+	border-color: #a71;
+	background-color: #000;
+}
+
+#main-menu-body {
+	overflow: hidden; 
+	margin: 0; 
+	width: 100%; 
+	height: 100%; 
+	-moz-user-select: none; 
+	-webkit-user-select: none; 
+	-ms-user-select:none; 
+	user-select:none;
+	-o-user-select:none;
+	background-color: transparent;
+	background-image: url('imgs/bg.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center; 
+	background-size: auto 100%;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	color: #ffc;
+}
+
+.select2-container--default .select2-selection--single, .select2-dropdown, .select2-search--dropdown .select2-search__field {
+	background-color: #000;
+	border: 1px solid #a71;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+	background-color: #a71;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+	background-color: #d95;
+	color: #000;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+	background-color: #fc1;
+} 
+
+.select2-container {
+  width: 200px !important;
+}
+
+.menu-choice-checkbox {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+/* game-overlay.html */
+
+#msg-overlay {
+	text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+	font-family: 'Fontin';
+	font-size: 2vh;
+	position: absolute;
+	bottom: 5vh;
+	left: 38vw;
+	width: 24vw;
+	color: #ffffff;
+	-moz-user-select: none; 
+	-webkit-user-select: none; 
+	-ms-user-select:none; 
+	user-select:none;
+	-o-user-select:none;
+	cursor: default;
+	text-align: right;
+}
+
+#msg-overlay > div {
+	height: 2.7vw;
+}
+
+.game-button-icon {
+	width: 2.7vw;
+	height: 2.7vw;
+	background-image: url('imgs/buttons.png');
+	background-position-x: 0%;
+	background-position-y: 0%;
+	display: inline-block;
+	background-size: 1900% 200%;
+}
+
+.game-button-text {
+	display: inline-block;
+	height: 2.7vw;
+	vertical-align: top;
+	padding-top: 0.9vw;
+}
+
+#start-to-close .game-button-icon {
+	background-position-x: 77.94%;
+}
+
+#navigate-open-menu .game-button-icon {
+	background-position-x: 77.94%;
+}
+
+#navigate-up-down .game-button-icon {
+	background-position-x: 27.84%;
+}
+
+#navigate-dpad .game-button-icon {
+	background-position-x: 0%;
+}
+
+#navigate-confirm-key-down .game-button-icon {
+	background-position-x: 50%;
+}
+
+#navigate-left-thumbstick .game-button-icon {
+	background-position-x: 39%;
+}
+
+#navigate-move-thumbstick .game-button-icon {
+	background-position-x: 39%;
+}
+
+#navigate-right-thumbstick .game-button-icon {
+	background-position-x: 44.5%;
+}
+
+#navigate-escape-key .game-button-icon {
+	background-position-x: -11.1%;
+}
+
+#navigate-loot-position .game-button-icon {
+	background-position-x: 72.185%;
+}
+
+#navigate-alt-click .game-button-icon {
+	background-position-x: -5.6%;
+}
+
+#navigate-pick-with .game-button-icon {
+	background-position-x: 50%;
+}
+
+#navigate-use-with .game-button-icon {
+	background-position-x: 55.55%;
+}
+
+#navigate-hold-ctrl-inv .game-button-icon {
+	background-position-x: 83.385%;
+}
+
+#navigate-center-cursor .game-button-icon {
+	background-position-x: 72.185%;
+}
+
+#navigate-select-tab .game-button-icon {
+	background-position-x: 72.185%;
+}
+
+#navigate-hold-shift-inv .game-button-icon {
+	background-position-x: 88.84%;
+}
+
+#navigate-confirm-sale {
+	font-size: 0.75em;
+	height: 1.8vw !important;
+}
+
+#navigate-confirm-sale .game-button-text {
+	height: 1.8vw;
+	padding-top: 0.4vw;
+}
+
+#navigate-confirm-sale .game-button-icon {
+	width: 1.8vw;
+	height: 1.8vw;
+}
+
+#navigate-confirm-sale .first-icon {
+	background-position-x: 66.84%;
+}
+
+#navigate-confirm-sale .second-icon {
+	background-position-x: 61.05%;
+}
+
+#navigate-stash-tabs {
+	font-size: 0.75em;
+	height: 1.8vw !important;
+}
+
+#navigate-stash-tabs .game-button-text {
+	height: 1.8vw;
+	padding-top: 0.4vw;
+}
+
+#navigate-stash-tabs .game-button-icon {
+	width: 1.8vw;
+	height: 1.8vw;
+}
+
+#navigate-stash-tabs .first-icon {
+	background-position-x: 66.84%;
+}
+
+#navigate-stash-tabs .second-icon {
+	background-position-x: 61.05%;
+}
+
+#navigate-scroll-craft {
+	font-size: 0.75em;
+	height: 1.8vw !important;
+}
+
+#navigate-scroll-craft .game-button-text {
+	height: 1.8vw;
+	padding-top: 0.4vw;
+}
+
+#navigate-scroll-craft .game-button-icon {
+	width: 1.8vw;
+	height: 1.8vw;
+}
+
+#navigate-scroll-craft .first-icon {
+	background-position-x: 66.84%;
+}
+
+#navigate-scroll-craft .second-icon {
+	background-position-x: 61.05%;
+}
