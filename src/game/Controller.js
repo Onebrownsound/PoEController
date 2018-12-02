@@ -57,23 +57,36 @@ var HID = require ('node-hid');
 // Searches for Xbox 360 Controller, Xbox 360 Wifi Controller, Xbox One Controller and Xbox 360 Wireless Receiver
 // http://www.linux-usb.org/usb.ids
 var VID = 0x45E; // Microsoft
-var PID = [0x28E, 0x28F, 0x2D1, 0x719, 0x2A1];
+var PID = [0x28E, 0x28F, 0x2D1, 0x719, 0x2A1, 0x2E3, 0x2FF, 0x202];
 
 var HIDController = null;
 var controllerFound = false;
 
-Logger.log('info', 'device dump: %j', HID.devices());
+var devices = HID.devices();
+var deviceInfo = devices.find( function(d) {
+    var isMicro = d.vendorId===0x45E;
+    return isMicro;
+});
 
-for(var i = 0; i < PID.length && HIDController === null; i++) {
-	try {
-		HIDController = new HID.HID(VID, PID[i]);
-	} catch (e) {
-		Logger.warn(e);
+Logger.log('info', 'device dump: %j', devices);
+if (deviceInfo){
+	Logger.log('info', 'found one' + deviceInfo.path);
+	HIDController = new HID.HID(deviceInfo.path);
+}
+else{
+	for(var i = 0; i < PID.length && HIDController === null; i++) {
+		try {
+			HIDController = new HID.HID(VID, PID[i]);
+		} catch (e) {
+			Logger.warn(e);
+		}
 	}
 }
 
+
 function addDataListener(cb) {
 	if(HIDController !== null) {
+		Logger.log('info', 'Adding controller callback');
 		HIDController.addListener('data', cb);
 	}
 }

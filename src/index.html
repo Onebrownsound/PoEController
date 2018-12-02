@@ -117,13 +117,17 @@
 					<label><a target="_blank" href="https://github.com/csiqueirasilva/PoEController/blob/master/README.md">Click here to check the README file for more information</a></label>
 				</div>
 				<div>
-				
-					<div id="arpg-help-checkbox" class="menu-choice-checkbox checkbox">
-						<label><input type="checkbox" checked="checked">Use ARPG mode on-screen help</label>
+					
+					<div class="menu-choice-checkbox checkbox">
+						<label><input id="keybinds-help-checkbox" type="checkbox" checked="checked">Show keybind/loot overlay</label>
+					</div>
+
+					<div class="menu-choice-checkbox checkbox">
+						<label><input id="arpg-help-checkbox" type="checkbox" checked="checked">Use ARPG mode on-screen help</label>
 					</div>
 					
-					<div id="menu-help-checkbox" class="menu-choice-checkbox checkbox">
-						<label><input type="checkbox" checked="checked">Use menus on-screen help</label>
+					<div  class="menu-choice-checkbox checkbox">
+						<label><input id="menu-help-checkbox" type="checkbox" checked="checked">Use menus on-screen help</label>
 					</div>
 
 					<button id="btn-start" class="btn">Start gamepad</button>
@@ -164,6 +168,10 @@
 	
 			$('#arpg-help-checkbox').click(function() {
 				global.setARPGHelp($(this).is(':checked'));
+			});
+
+			$('#keybinds-help-checkbox').click(function() {
+				global.setKeybindsHelp($(this).is(':checked'));
 			});
 
 			$('#menu-help-checkbox').click(function() {
@@ -214,7 +222,7 @@
 					Game.start(function() {
 						global.gameOverlay.focus();
 						setTimeout(function() {
-							updateGameOverlay(GAME_MODE.ARPG);
+							 updateGameOverlay(GAME_MODE.ARPG);
 							$('#flash-msg').hide();
 							btn.prop('disabled', false);
 						}, 6500);
@@ -247,8 +255,6 @@
 			});
 	
 			$(window).load(function() {
-				PoESettings.getFilePath();
-				PoESettings.rewriteConfigFile();
 				UserSettings.Load(function() {
 					$('#main-menu-body').show();
 					$('#select-input-method').trigger('change');

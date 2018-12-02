@@ -24,7 +24,7 @@ behaviors['ARPG.Fixed.FetchLootRelease'] = function () {
 };
 
 behaviors["ARPG.Fixed.EscapeAndReturn"] = function () {
-	robot.keyTap("escape");
+	// robot.keyTap("escape");
 	Mode.change(module.exports);
 };
 
@@ -196,7 +196,7 @@ function ResolveDataInput(data) {
 
 			lastTimeClick = timestamp;
 		} else if (data[9] > 128 && timestamp - lastTimeClick > 500) {
-			robot.keyTap("escape");
+			// robot.keyTap("escape");
 			lastTimeClick = timestamp;
 		}
 

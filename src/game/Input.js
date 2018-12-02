@@ -16,7 +16,6 @@ robot.setKeyboardDelay(0);
 function ResolveDpadInput(data, DpadMapping, InputMapping, BehaviorMapping, skipKeyUp) {
 
 	var buttons = parseInt(data / 4) * 4;
-
 	switch (buttons) {
 		case KEYS.DPAD_UP:
 
@@ -93,7 +92,6 @@ var ActionRepeatTimestamps = {};
 function ActivateKey(keys, reference, behaviorReference, index, pressed, skipKeyUp) {
 	
 	var timestamp = new Date().getTime();
-
 	if (keys[index]) {
 
 		var behavior = behaviorReference[keys[index]];
@@ -139,7 +137,7 @@ function ResetInputArrays(Keys, Dpad) {
 	}
 }
 
-function MoveThumbstick(DataX, DataY, Max, Threshold, IfCallback, ElseCallback) {
+function MoveThumbstick(DataX, DataY, Max, Threshold, IfCallback, ElseCallback) {	
 	var x = (DataX - Max) / Max;
 	var y = (DataY - Max) / Max;
 
@@ -155,7 +153,7 @@ var RIGHT_THUMBSTICK_THRESHOLD = 0.16;
 
 function RightThumbIfCallback(x, y) {
 	var pos = robot.getMousePos();
-	var mouseSpeed = 3;
+	var mouseSpeed = 5;
 	x = mouseSpeed * Math.sign(x) * Math.pow(x, 2);
 	y = mouseSpeed * Math.sign(y) * Math.pow(y, 2);
 	robot.moveMouse(pos.x + x * mouseSpeed, pos.y + y * mouseSpeed);
