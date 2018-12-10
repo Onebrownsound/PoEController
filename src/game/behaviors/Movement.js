@@ -4,16 +4,22 @@ var robot = require('robotjs');
 var globalMoveAngle = 0;
 var globalMoveRadius = null;
 
-function move(cb) {
+function move(cb, is_loot_pickup = false) {
 	var R;
 	var aspectFix;
 
-	if (globalMoveRadius === null) {
+	if (globalMoveRadius === null && is_loot_pickup == false) {
 		R = Window.height * 0.1050;
 		aspectFix = 1;
 	} else {
 		R = globalMoveRadius;
 		aspectFix = Window.aspect;
+	}
+
+	if (is_loot_pickup == true){
+		// Hard coded loot pickup radius.
+		// Allows for easier/quicker time of snagging up loot
+		R = 15;
 	}
 	
 	robot.moveMouse(Window.basePosition.x + R * Math.cos(globalMoveAngle) * aspectFix, Window.basePosition.y + R * Math.sin(globalMoveAngle));

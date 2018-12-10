@@ -137,12 +137,15 @@ function ResetInputArrays(Keys, Dpad) {
 	}
 }
 
-function MoveThumbstick(DataX, DataY, Max, Threshold, IfCallback, ElseCallback) {	
+function MoveThumbstick(DataX, DataY, Max, Threshold, IfCallback, ElseCallback, isLootPickup = false) {	
 	var x = (DataX - Max) / Max;
 	var y = (DataY - Max) / Max;
 
 	if (Math.abs(x) > Threshold || Math.abs(y) > Threshold) {
-		IfCallback(x, y);
+		if (isLootPickup){
+			Logger.log('info', 'Loot movement threshold met: ' + [DataX, DataY, Math.abs(x), Math.abs(y), Threshold].join(' '));
+		}
+		IfCallback(x, y, isLootPickup);
 	} else {
 		ElseCallback();
 	}
@@ -153,7 +156,7 @@ var RIGHT_THUMBSTICK_THRESHOLD = 0.16;
 
 function RightThumbIfCallback(x, y) {
 	var pos = robot.getMousePos();
-	var mouseSpeed = 5;
+	var mouseSpeed = 3;
 	x = mouseSpeed * Math.sign(x) * Math.pow(x, 2);
 	y = mouseSpeed * Math.sign(y) * Math.pow(y, 2);
 	robot.moveMouse(pos.x + x * mouseSpeed, pos.y + y * mouseSpeed);
@@ -171,12 +174,13 @@ function LeftThumbstickMouse(data, cbIf, cbElse) {
 		cbElse || RightThumbElseCallback);
 }
 
-function RightThumbstickMouse(data) {
+function RightThumbstickMouse(data, cbIf, cbElse) {
 	MoveThumbstick(data[5], data[7],
 		MAX_INPUT_THUMBSTICK,
 		RIGHT_THUMBSTICK_THRESHOLD,
-		RightThumbIfCallback,
-		RightThumbElseCallback);
+		cbIf || RightThumbIfCallback,
+		cbElse || RightThumbElseCallback,
+		true);
 }
 
 module.exports.activateKey = ActivateKey;
