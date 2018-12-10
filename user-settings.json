@@ -1,1 +1,1 @@
-{"input":"xbox","q":"arpg.MouseLastAngleMid.KeyDown","w":"arpg.nothing","e":"arpg.nothing","r":"arpg.ShiftMouseLastAngleLow.KeyDown","right":"arpg.ShiftMouseLastAngleHigh.KeyDown","middle":"arpg.MouseLastAngleLow.KeyDown"}
+{"input":"xbox","q":"arpg.nothing","w":"arpg.nothing","e":"arpg.MouseLastAngleLow.KeyDown","r":"ARPG.MouseNeutral","right":"arpg.ShiftMouseLastAngleHigh.KeyDown","middle":"arpg.nothing"}
