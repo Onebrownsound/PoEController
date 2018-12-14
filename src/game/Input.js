@@ -142,9 +142,6 @@ function MoveThumbstick(DataX, DataY, Max, Threshold, IfCallback, ElseCallback, 
 	var y = (DataY - Max) / Max;
 
 	if (Math.abs(x) > Threshold || Math.abs(y) > Threshold) {
-		if (isLootPickup){
-			Logger.log('info', 'Loot movement threshold met: ' + [DataX, DataY, Math.abs(x), Math.abs(y), Threshold].join(' '));
-		}
 		IfCallback(x, y, isLootPickup);
 	} else {
 		ElseCallback();
