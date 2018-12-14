@@ -111,6 +111,12 @@ function LeftThumbElseCallback() {
 	}
 }
 
+function RightThumbElseCallBack() {
+	if (moving) {
+		Movement.stop(stopMovementCallback);
+	}
+}
+
 var LastTimestampStart = 0;
 var LastLootTimestamp = 0;
 var StartBlockInterval = 0;
@@ -161,12 +167,12 @@ function ResolveDataInput(data) {
 		
 		// resolve right thumb axis
 		var CurrentLootTimeStamp = new Date().getTime();
-		if (CurrentLootTimeStamp - LastLootTimestamp > 150){
+		if (CurrentLootTimeStamp - LastLootTimestamp > 150 ){
 			Input.moveStick(data[5], data[7],
 				MAX_INPUT_THUMBSTICK,
 				RIGHT_THUMBSTICK_LOOT_THRESHOLD,
 				LeftThumbIfCallback,
-				LeftThumbElseCallback,
+				RightThumbElseCallBack,
 				true);
 			LastLootTimestamp  = CurrentLootTimeStamp;
 		}
