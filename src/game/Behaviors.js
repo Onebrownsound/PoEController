@@ -99,7 +99,7 @@ behaviors['arpg.ShiftMouseLastAngleHigh.KeyUp'] = function (args, key) {
 };
 
 behaviors['arpg.MouseLastAngleLow.KeyDown'] = function (args, key) {
-	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.1, key);
+	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.0825, key);
 };
 
 behaviors['arpg.MouseLastAngleLow.KeyUp'] = function (args, key) {
