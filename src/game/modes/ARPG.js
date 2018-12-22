@@ -83,8 +83,8 @@ var InputDPAD = {};
 var moving = false;
 var lastTimeClick = 0;
 
-var LEFT_THUMBSTICK_THRESHOLD = 0.25;
-var RIGHT_THUMBSTICK_LOOT_THRESHOLD = 0.45;
+var LEFT_THUMBSTICK_THRESHOLD = 0.45;
+var RIGHT_THUMBSTICK_LOOT_THRESHOLD = 0.65;
 
 function stopMovementCallback() {
 	moving = false;

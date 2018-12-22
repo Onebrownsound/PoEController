@@ -19,7 +19,7 @@ function move(cb, is_loot_pickup = false) {
 	if (is_loot_pickup == true){
 		// Hard coded loot pickup radius.
 		// Allows for easier/quicker time of snagging up loot
-		R = 11;
+		R = 15;
 	}
 	
 	robot.moveMouse(Window.basePosition.x + R * Math.cos(globalMoveAngle) * aspectFix, Window.basePosition.y + R * Math.sin(globalMoveAngle));
