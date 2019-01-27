@@ -9,7 +9,7 @@ function move(cb, is_loot_pickup = false) {
 	var aspectFix;
 
 	if (globalMoveRadius === null && is_loot_pickup == false) {
-		R = Window.height * 0.1050;
+		R = Window.height * 0.1250;
 		aspectFix = 1;
 	} else {
 		R = globalMoveRadius;
