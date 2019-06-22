@@ -41,6 +41,11 @@ module.exports.exported = {
 			help: "Use a small increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
 		},
 		{
+			name: "(H. Position) Small medium increment to cursor position",
+			key: "arpg.ShiftMouseLastAngleSmallMid.KeyDown",
+			help: "Use a small medium increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
+		},
+		{
 			name: "(H. Position) Medium increment to cursor position",
 			key: "arpg.ShiftMouseLastAngleMid.KeyDown",
 			help: "Use a medium increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
@@ -88,6 +93,16 @@ behaviors['arpg.ShiftMouseLastAngleLow.KeyUp'] = function (args, key) {
 	behaviors['arpg.MouseLastAngleLow.KeyUp'](args, key);
 };
 
+behaviors['arpg.ShiftMouseLastAngleSmallMid.KeyDown'] = function (args, key) {
+	AttackInPlace.setAttackInPlace();
+	behaviors['arpg.MouseLastAngleSmallMid.KeyDown'](args, key);
+};
+
+behaviors['arpg.ShiftMouseLastAngleSmallMid.KeyUp'] = function (args, key) {
+	AttackInPlace.clearAttackInPlace();
+	behaviors['arpg.MouseLastAngleSmallMid.KeyUp'](args, key);
+};
+
 behaviors['arpg.ShiftMouseLastAngleMid.KeyDown'] = function (args, key) {
 	AttackInPlace.setAttackInPlace();
 	behaviors['arpg.MouseLastAngleMid.KeyDown'](args, key);
@@ -133,6 +148,14 @@ behaviors['arpg.MouseLastAngleLow.KeyDown'] = function (args, key) {
 };
 
 behaviors['arpg.MouseLastAngleLow.KeyUp'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
+};
+
+behaviors['arpg.MouseLastAngleSmallMid.KeyDown'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.15375, key);
+};
+
+behaviors['arpg.MouseLastAngleSmallMid.KeyUp'] = function (args, key) {
 	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
 };
 
