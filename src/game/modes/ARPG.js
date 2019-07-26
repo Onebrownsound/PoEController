@@ -24,7 +24,7 @@ behaviors['ARPG.Fixed.FetchLootRelease'] = function () {
 };
 
 behaviors["ARPG.Fixed.EscapeAndReturn"] = function () {
-	robot.keyTap("escape");
+	 // robot.keyTap("escape");
 	Mode.change(module.exports);
 };
 
@@ -84,6 +84,7 @@ var moving = false;
 var lastTimeClick = 0;
 
 var LEFT_THUMBSTICK_THRESHOLD = 0.25;
+var RIGHT_THUMBSTICK_LOOT_THRESHOLD = 0.45;
 
 function stopMovementCallback() {
 	moving = false;
@@ -98,10 +99,9 @@ function startMovementCallback() {
 	}
 }
 
-function LeftThumbIfCallback(x, y) {
+function LeftThumbIfCallback(x, y, is_loot_pickup = false) {
 	var angle = Math.atan2(y, x);
-	Movement.setAngle(angle);
-	Movement.move(startMovementCallback);
+	Movement.move(startMovementCallback, null, angle, is_loot_pickup);
 }
 
 function LeftThumbElseCallback() {
@@ -110,8 +110,14 @@ function LeftThumbElseCallback() {
 	}
 }
 
-var LastTimestampStart = 0;
+function RightThumbElseCallBack() {
+	if (moving) {
+		Movement.stop(stopMovementCallback);
+	}
+}
 
+var LastTimestampStart = 0;
+var LastLootTimestamp = 0;
 var StartBlockInterval = 0;
 
 function ResolveDataInput(data) {
@@ -157,6 +163,19 @@ function ResolveDataInput(data) {
 			LEFT_THUMBSTICK_THRESHOLD,
 			LeftThumbIfCallback,
 			LeftThumbElseCallback);
+		
+		// resolve right thumb axis
+		var CurrentLootTimeStamp = new Date().getTime();
+		if (CurrentLootTimeStamp - LastLootTimestamp > 150 ){
+			Input.moveStick(data[5], data[7],
+				MAX_INPUT_THUMBSTICK,
+				RIGHT_THUMBSTICK_LOOT_THRESHOLD,
+				LeftThumbIfCallback,
+				RightThumbElseCallBack,
+				true);
+			LastLootTimestamp  = CurrentLootTimeStamp;
+		}
+		
 
 		// resolve r3 and l3
 
@@ -196,7 +215,7 @@ function ResolveDataInput(data) {
 
 			lastTimeClick = timestamp;
 		} else if (data[9] > 128 && timestamp - lastTimeClick > 500) {
-			robot.keyTap("escape");
+			// robot.keyTap("escape");
 			lastTimeClick = timestamp;
 		}
 
@@ -236,3 +255,5 @@ module.exports.resolveInput = ResolveDataInput;
 module.exports.leaveArea = LeaveArea;
 module.exports.setBehavior = SetBehavior;
 module.exports.id = GAME_MODE.ARPG;
+module.exports.LeftThumbIfCallback = LeftThumbIfCallback;
+module.exports.LeftThumbElseCallback = LeftThumbElseCallback;

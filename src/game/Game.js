@@ -29,7 +29,6 @@ var RightThumbstickMouseInterval = null;
 var LastInputData = null;
 
 function ControllerListener(data) {
-	Input.rightThumbstick(data);
 	Mode.solveInput(data);
 }
 

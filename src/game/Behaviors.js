@@ -41,14 +41,29 @@ module.exports.exported = {
 			help: "Use a small increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
 		},
 		{
+			name: "(H. Position) Small medium increment to cursor position",
+			key: "arpg.ShiftMouseLastAngleSmallMid.KeyDown",
+			help: "Use a small medium increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
+		},
+		{
 			name: "(H. Position) Medium increment to cursor position",
 			key: "arpg.ShiftMouseLastAngleMid.KeyDown",
 			help: "Use a medium increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
 		},
 		{
+			name: "(H. Position) MediumHigh increment to cursor position",
+			key: "arpg.ShiftMouseLastAngleMidHigh.KeyDown",
+			help: "Use a medium high increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
+		},
+		{
 			name: "(H. Position) High increment to cursor position",
 			key: "arpg.ShiftMouseLastAngleHigh.KeyDown",
 			help: "Use a high increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
+		},
+		{
+			name: "(VH. Position) VeryHigh increment to cursor position",
+			key: "arpg.ShiftMouseLastAngleVeryHigh.KeyDown",
+			help: "Use a very high increment to the cursor position last angle before pressing the button and while holding attack in place. Good for ranged attacks and spells"
 		}
 	]
 };
@@ -78,6 +93,16 @@ behaviors['arpg.ShiftMouseLastAngleLow.KeyUp'] = function (args, key) {
 	behaviors['arpg.MouseLastAngleLow.KeyUp'](args, key);
 };
 
+behaviors['arpg.ShiftMouseLastAngleSmallMid.KeyDown'] = function (args, key) {
+	AttackInPlace.setAttackInPlace();
+	behaviors['arpg.MouseLastAngleSmallMid.KeyDown'](args, key);
+};
+
+behaviors['arpg.ShiftMouseLastAngleSmallMid.KeyUp'] = function (args, key) {
+	AttackInPlace.clearAttackInPlace();
+	behaviors['arpg.MouseLastAngleSmallMid.KeyUp'](args, key);
+};
+
 behaviors['arpg.ShiftMouseLastAngleMid.KeyDown'] = function (args, key) {
 	AttackInPlace.setAttackInPlace();
 	behaviors['arpg.MouseLastAngleMid.KeyDown'](args, key);
@@ -86,6 +111,16 @@ behaviors['arpg.ShiftMouseLastAngleMid.KeyDown'] = function (args, key) {
 behaviors['arpg.ShiftMouseLastAngleMid.KeyUp'] = function (args, key) {
 	AttackInPlace.clearAttackInPlace();
 	behaviors['arpg.MouseLastAngleMid.KeyUp'](args, key);
+};
+
+behaviors['arpg.ShiftMouseLastAngleMidHigh.KeyDown'] = function (args, key) {
+	AttackInPlace.setAttackInPlace();
+	behaviors['arpg.MouseLastAngleMidHigh.KeyDown'](args, key);
+};
+
+behaviors['arpg.ShiftMouseLastAngleMidHigh.KeyUp'] = function (args, key) {
+	AttackInPlace.clearAttackInPlace();
+	behaviors['arpg.MouseLastAngleMidHigh.KeyUp'](args, key);
 };
 
 behaviors['arpg.ShiftMouseLastAngleHigh.KeyDown'] = function (args, key) {
@@ -98,11 +133,29 @@ behaviors['arpg.ShiftMouseLastAngleHigh.KeyUp'] = function (args, key) {
 	behaviors['arpg.MouseLastAngleHigh.KeyUp'](args, key);
 };
 
+behaviors['arpg.ShiftMouseLastAngleVeryHigh.KeyDown'] = function (args, key) {
+	AttackInPlace.setAttackInPlace();
+	behaviors['arpg.MouseLastAngleVeryHigh.KeyDown'](args, key);
+};
+
+behaviors['arpg.ShiftMouseLastAngleVeryHigh.KeyUp'] = function (args, key) {
+	AttackInPlace.clearAttackInPlace();
+	behaviors['arpg.MouseLastAngleVeryHigh.KeyUp'](args, key);
+};
+
 behaviors['arpg.MouseLastAngleLow.KeyDown'] = function (args, key) {
-	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.1, key);
+	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.0825, key);
 };
 
 behaviors['arpg.MouseLastAngleLow.KeyUp'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
+};
+
+behaviors['arpg.MouseLastAngleSmallMid.KeyDown'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.19, key);
+};
+
+behaviors['arpg.MouseLastAngleSmallMid.KeyUp'] = function (args, key) {
 	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
 };
 
@@ -114,10 +167,26 @@ behaviors['arpg.MouseLastAngleMid.KeyUp'] = function (args, key) {
 	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
 };
 
+behaviors['arpg.MouseLastAngleMidHigh.KeyDown'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.3, key);
+};
+
+behaviors['arpg.MouseLastAngleMidHigh.KeyUp'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
+};
+
 behaviors['arpg.MouseLastAngleHigh.KeyDown'] = function (args, key) {
 	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.35, key);
 };
 
 behaviors['arpg.MouseLastAngleHigh.KeyUp'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
+};
+
+behaviors['arpg.MouseLastAngleVeryHigh.KeyDown'] = function (args, key) {
+	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.4, key);
+};
+
+behaviors['arpg.MouseLastAngleVeryHigh.KeyUp'] = function (args, key) {
 	IncrementedCursorPosition.mouseWithIncrementKeyUp(key);
 };

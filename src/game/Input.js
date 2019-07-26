@@ -16,7 +16,6 @@ robot.setKeyboardDelay(0);
 function ResolveDpadInput(data, DpadMapping, InputMapping, BehaviorMapping, skipKeyUp) {
 
 	var buttons = parseInt(data / 4) * 4;
-
 	switch (buttons) {
 		case KEYS.DPAD_UP:
 
@@ -93,7 +92,6 @@ var ActionRepeatTimestamps = {};
 function ActivateKey(keys, reference, behaviorReference, index, pressed, skipKeyUp) {
 	
 	var timestamp = new Date().getTime();
-
 	if (keys[index]) {
 
 		var behavior = behaviorReference[keys[index]];
@@ -139,12 +137,12 @@ function ResetInputArrays(Keys, Dpad) {
 	}
 }
 
-function MoveThumbstick(DataX, DataY, Max, Threshold, IfCallback, ElseCallback) {
+function MoveThumbstick(DataX, DataY, Max, Threshold, IfCallback, ElseCallback, isLootPickup = false) {	
 	var x = (DataX - Max) / Max;
 	var y = (DataY - Max) / Max;
 
 	if (Math.abs(x) > Threshold || Math.abs(y) > Threshold) {
-		IfCallback(x, y);
+		IfCallback(x, y, isLootPickup);
 	} else {
 		ElseCallback();
 	}
@@ -173,12 +171,13 @@ function LeftThumbstickMouse(data, cbIf, cbElse) {
 		cbElse || RightThumbElseCallback);
 }
 
-function RightThumbstickMouse(data) {
+function RightThumbstickMouse(data, cbIf, cbElse) {
 	MoveThumbstick(data[5], data[7],
 		MAX_INPUT_THUMBSTICK,
 		RIGHT_THUMBSTICK_THRESHOLD,
-		RightThumbIfCallback,
-		RightThumbElseCallback);
+		cbIf || RightThumbIfCallback,
+		cbElse || RightThumbElseCallback,
+		true);
 }
 
 module.exports.activateKey = ActivateKey;

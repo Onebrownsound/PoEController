@@ -144,6 +144,11 @@
 
 			var ARPGHelp = true;
 			var MenuHelp = true;
+			var KeybindsHelp = true;
+
+			global.setKeybindsHelp = function (b) {
+				KeybindsHelp = b;
+			};
 			
 			global.setARPGHelp = function(b) {
 				ARPGHelp = b;
@@ -267,23 +272,24 @@
 			}
 
 			function drawARPGCanvas() {
-				drawOverlayCanvas();
-				
-				buttonSize = window.innerWidth * 0.015;
-				
-				drawButton(XIndex.DPAD_LEFT, 0.1575, 0.97);
-				drawButton(XIndex.DPAD_DOWN, 0.18, 0.97);
-				drawButton(XIndex.DPAD_RIGHT, 0.205, 0.97);
-				drawButton(XIndex.DPAD_UP, 0.23, 0.97);
-				drawButton(XIndex.L3, 0.255, 0.97);
-				
-				drawButton(XIndex.SHOULDER_LEFT, 0.8215, 0.905);
-				drawButton(XIndex.SHOULDER_RIGHT, 0.849, 0.905);
+				if (KeybindsHelp){
+					drawOverlayCanvas();
+					buttonSize = window.innerWidth * 0.015;
+					drawButton(XIndex.DPAD_LEFT, 0.1575, 0.97);
+					drawButton(XIndex.DPAD_DOWN, 0.18, 0.97);
+					drawButton(XIndex.DPAD_RIGHT, 0.205, 0.97);
+					drawButton(XIndex.DPAD_UP, 0.23, 0.97);
+					drawButton(XIndex.L3, 0.255, 0.97);
+					
+					drawButton(XIndex.SHOULDER_LEFT, 0.8215, 0.905);
+					drawButton(XIndex.SHOULDER_RIGHT, 0.849, 0.905);
 
-				drawButton(XIndex.KEY_LEFT, 0.8215 - 0.02875 * 3, 0.97);
-				drawButton(XIndex.KEY_DOWN, 0.8215 - 0.02875 * 2, 0.97);
-				drawButton(XIndex.KEY_RIGHT, 0.8215 - 0.02875, 0.97);
-				drawButton(XIndex.KEY_UP, 0.8215, 0.97);
+					drawButton(XIndex.KEY_LEFT, 0.8215 - 0.02875 * 3, 0.97);
+					drawButton(XIndex.KEY_DOWN, 0.8215 - 0.02875 * 2, 0.97);
+					drawButton(XIndex.KEY_RIGHT, 0.8215 - 0.02875, 0.97);
+					drawButton(XIndex.KEY_UP, 0.8215, 0.97);
+				}
+				
 				
 				if(ARPGHelp) {
 					showARPGHelp();
