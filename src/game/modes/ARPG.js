@@ -83,8 +83,8 @@ var InputDPAD = {};
 var moving = false;
 var lastTimeClick = 0;
 
-var LEFT_THUMBSTICK_THRESHOLD = 0.45;
-var RIGHT_THUMBSTICK_LOOT_THRESHOLD = 0.65;
+var LEFT_THUMBSTICK_THRESHOLD = 0.25;
+var RIGHT_THUMBSTICK_LOOT_THRESHOLD = 0.45;
 
 function stopMovementCallback() {
 	moving = false;
@@ -101,8 +101,7 @@ function startMovementCallback() {
 
 function LeftThumbIfCallback(x, y, is_loot_pickup = false) {
 	var angle = Math.atan2(y, x);
-	Movement.setAngle(angle);
-	Movement.move(startMovementCallback, is_loot_pickup);
+	Movement.move(startMovementCallback, null, angle, is_loot_pickup);
 }
 
 function LeftThumbElseCallback() {
