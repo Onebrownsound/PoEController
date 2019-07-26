@@ -8,9 +8,8 @@ var LastIncrementActionTimeout = null;
 
 function MouseWithIncrementKeyDown(R, key) {
 	if (LastIncrementActionTimeout === null) {
-		Movement.setRadius(R);
-		var angle = Movement.getAngle();
-		robot.moveMouse(Window.basePosition.x + R * Math.cos(angle), Window.basePosition.y + R * Math.sin(angle));
+		var angle = Movement.getLastAngle();
+		Movement.move('', R, angle, false);
 
 		LastIncrementActionTimeout = setTimeout(function () {
 			KeyHandler.handle(key, "down");
@@ -21,7 +20,7 @@ function MouseWithIncrementKeyDown(R, key) {
 
 function MouseWithIncrementKeyUp(key) {
 	KeyHandler.handle(key, "up");
-	Movement.setRadius(null);
+	Movement.setLastRadius(null);
 }
 
 module.exports = {

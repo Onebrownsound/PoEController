@@ -152,7 +152,7 @@ behaviors['arpg.MouseLastAngleLow.KeyUp'] = function (args, key) {
 };
 
 behaviors['arpg.MouseLastAngleSmallMid.KeyDown'] = function (args, key) {
-	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.15375, key);
+	IncrementedCursorPosition.mouseWithIncrementKeyDown(Window.height * 0.19, key);
 };
 
 behaviors['arpg.MouseLastAngleSmallMid.KeyUp'] = function (args, key) {
